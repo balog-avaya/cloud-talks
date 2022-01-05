@@ -1,4 +1,9 @@
-import { Module } from '@nestjs/common';
+import {Module} from '@nestjs/common';
+import {TaskManagerService} from './task-manager.service';
+import { TaskManagerController } from './task-manager.controller';
 
-@Module({})
+@Module({
+  providers: [TaskManagerService],
+  controllers: [TaskManagerController],
+})
 export class TaskManagerModule {}

@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: taskmgr
+  name: taskmgr
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: taskmgr
+  template:
+    metadata:
+      labels:
+        app: taskmgr
+    spec:
+      containers:
+        - image: localhost:5555/taskmanager:1.3
+          imagePullPolicy: Always
+          name: taskmanager
+          envFrom:
+            - configMapRef:
+                name: taskmanager-configmap
+          ports:
+            - containerPort: 3000
+              protocol: TCP
+
+
