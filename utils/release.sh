@@ -3,8 +3,8 @@
 local_is_clean=`git status | grep 'nothing to commit, working tree clean' | wc -l`
 current_branch=`git rev-parse --abbrev-ref HEAD`
 
-if [ $current_branch != 'master' ]; then
-    echo "RELEASE: You can only release from the master branch."
+if [ $current_branch != 'main' ]; then
+    echo "RELEASE: You can only release from the main branch."
     exit 1
 fi
 
@@ -30,7 +30,7 @@ read -p 'RELEASE: Release with this tag? (y/n)' proceed
 
 if [ $proceed == 'y' ];then
     git tag $next_tag
-    git push origin master --tags
+    git push origin main --tags
     docker build -t taskmanager:$next_tag -f ./Dockerfile .
 else
     echo 'RELEASE: Release aborted by user.'
