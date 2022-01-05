@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: taskmgr-ingress
+spec:
+  rules:
+    - host: taskmgr.info
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: taskmgr
+                port:
+                  number: 3000
