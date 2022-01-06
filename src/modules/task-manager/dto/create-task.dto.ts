@@ -11,5 +11,5 @@ export class CreateTaskDto {
   @ApiProperty({description: 'Task description', required: false})
   @IsString()
   @IsOptional()
-  readonly description: string;
+  readonly description?: string;
 }

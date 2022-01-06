@@ -22,6 +22,7 @@ export class TaskManagerController {
   })
   @Get('tasks')
   async getTasks(@Request() req): Promise<Task[]> {
+    console.log('REQ', req.user);
     return this.taskmgrsvc.getTasks(req?.user?.id);
   }
 
