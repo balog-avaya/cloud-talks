@@ -16,7 +16,7 @@ spec:
         app: taskmgr
     spec:
       containers:
-        - image: localhost:5000/taskmanager:1.1
+        - image: petherenk/cloud-talks:latest
           imagePullPolicy: Always
           name: taskmanager
           envFrom:
