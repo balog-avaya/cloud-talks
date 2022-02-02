@@ -1,12 +1,10 @@
-import {Injectable} from '@nestjs/common';
-import {ConfigService} from '@nestjs/config';
-import {isNil} from "@nestjs/common/utils/shared.utils";
+import { Injectable } from '@nestjs/common';
+import { ConfigService } from '@nestjs/config';
+import { isNil } from '@nestjs/common/utils/shared.utils';
 
 @Injectable()
 export class ApiConfigService {
-
-  constructor(private configService: ConfigService) {
-  }
+  constructor(private configService: ConfigService) {}
 
   get isDevelopment(): boolean {
     return this.nodeEnv === 'development';
@@ -68,10 +66,9 @@ export class ApiConfigService {
 
     if (isNil(value)) {
       console.error(`ERROR: ${key} environment variable is not set`);
-      process.exit(1)
+      process.exit(1);
     }
 
     return value;
   }
-
 }

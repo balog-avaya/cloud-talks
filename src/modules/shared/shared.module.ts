@@ -1,9 +1,7 @@
-import {Global, Module} from '@nestjs/common';
-import {ApiConfigService} from "./api-config.service";
+import { Global, Module } from '@nestjs/common';
+import { ApiConfigService } from './api-config.service';
 
-const providers = [
-  ApiConfigService
-];
+const providers = [ApiConfigService];
 
 @Global()
 @Module({

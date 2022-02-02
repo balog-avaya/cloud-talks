@@ -1,22 +1,25 @@
-import {NestFactory, Reflector} from '@nestjs/core';
-import {AppModule} from './app.module';
-import {ExpressAdapter, NestExpressApplication} from "@nestjs/platform-express";
+import { NestFactory, Reflector } from '@nestjs/core';
+import { AppModule } from './app.module';
+import {
+  ExpressAdapter,
+  NestExpressApplication,
+} from '@nestjs/platform-express';
 import {
   ClassSerializerInterceptor,
   HttpStatus,
   INestApplication,
   UnprocessableEntityException,
-  ValidationPipe
-} from "@nestjs/common";
-import {SharedModule} from "./modules/shared/shared.module";
-import {ApiConfigService} from "./modules/shared/api-config.service";
-import {DocumentBuilder, SwaggerModule} from "@nestjs/swagger";
+  ValidationPipe,
+} from '@nestjs/common';
+import { SharedModule } from './modules/shared/shared.module';
+import { ApiConfigService } from './modules/shared/api-config.service';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(
     AppModule,
     new ExpressAdapter(),
-    {cors: true},
+    { cors: true },
   );
   app.enableVersioning();
 
@@ -36,7 +39,6 @@ async function bootstrap() {
 
   const configService = app.select(SharedModule).get(ApiConfigService);
 
-
   if (configService.isDevelopment) {
     setupSwagger(app, configService.apiVersion);
   }
@@ -48,12 +50,13 @@ async function bootstrap() {
   console.info(`server running on port ${port}`);
 
   return app;
-
 }
 
 function setupSwagger(app: INestApplication, version: string): void {
-  const documentBuilder = new DocumentBuilder().setTitle('Task Manager API').setVersion(version).addBearerAuth();
-
+  const documentBuilder = new DocumentBuilder()
+    .setTitle('Task Manager API')
+    .setVersion(version)
+    .addBearerAuth();
 
   documentBuilder.setVersion(version);
 
@@ -64,9 +67,7 @@ function setupSwagger(app: INestApplication, version: string): void {
     },
   });
 
-  console.info(
-    `Documentation: http://localhost:${process.env.PORT}/api`,
-  );
+  console.info(`Documentation: http://localhost:${process.env.PORT}/api`);
 }
 
 bootstrap();
