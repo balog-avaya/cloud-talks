@@ -8,3 +8,4 @@ data:
   JWT_EXPIRATION_TIME: "7200"
   API_VERSION: "1.0.0"
   PORT: "3000"
+  REDIS_URL: redis://redis-master:6379/0

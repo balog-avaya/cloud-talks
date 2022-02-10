@@ -1,0 +1,21 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: redis-master
+  namespace: default
+spec:
+  ports:
+    - protocol: TCP
+      port: 6379
+      targetPort: 6379
+  selector:
+    app: redis
+    role: master
+    tier: backend
+  type: ClusterIP
+  sessionAffinity: None
+  ipFamilies:
+    - IPv4
+  ipFamilyPolicy: SingleStack
+  internalTrafficPolicy: Cluster
+  
